@@ -74,6 +74,23 @@ app.get("/withdraw/:leafIndex/:chain", async (req:Request, res: Response) => {
   }
 });
 
+app.get("/leafindex/:chain", async (req:Request, res: Response) => {
+  try{
+    let obj: any;
+    const {chain} = req.params;
+
+    if (chain == "mantle"){
+      obj = mantleTree.totalElements -1
+    } else if (chain == "linea"){
+      obj = lineaTree.totalElements -1
+    }
+    return res.status(200).json(obj);
+  } catch(error){
+    console.error("Error withdrawing:", error);
+    return res.status(500).json({ error: "An error occurred while withdrawing" });
+  }
+});
+
 // app.get("/deposit", async (req: Request, res: Response) => {
 //   let result: number;
 //   try{
@@ -93,6 +110,6 @@ async function buildPos(){
   poseidon = await buildPoseidon();
 }
 
-app.listen(3000, () => {
-  console.log("Application listening at http://localhost:3000");
+app.listen(3001, () => {
+  console.log("Application listening at http://localhost:3001");
 });
