@@ -1,7 +1,6 @@
 import { Hasher } from "./merkleTree";
 import { ethers } from "ethers";
 
-
 export class PoseidonHasher implements Hasher {
     poseidon: any;
 

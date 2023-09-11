@@ -1,3 +1,0 @@
-export const poolAddr = "0xB7360BFDc08454C7ce325E486d076611a15eE048";
-export const erc20Addr = "0x7272b7d9C8308B8B3c1907eAc5e7B0894A4b8e9A";
-
