@@ -3,8 +3,9 @@ import { MerkleTree } from "./utils/merkleTree"
 
 export async function deposit (commitment: string, tree: MerkleTree){
     try{
-         await tree.insert(commitment);
-         return tree;
+        await tree.insert(commitment);
+        console.log(tree);
+        return tree;
     } catch (error) {
         console.log(error);
         return error;

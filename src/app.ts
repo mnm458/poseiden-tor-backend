@@ -41,14 +41,16 @@ function middleware(req: Request, res: Response, next: NextFunction) {
 app.use(middleware);
 
 app.get("/deposit/:commitment/:chain", async (req: Request, res: Response) => {
+  let tree: any;
   try{
     const {commitment, chain} = req.params;
+    console.log("commitment: ", commitment, " chain: ", chain)
     if (chain == "mantle"){
-      await deposit(commitment,mantleTree);
+     tree = await deposit(commitment,mantleTree);
     } else if (chain == "linea"){
-      await deposit(commitment, lineaTree);
+      tree = await deposit(commitment, lineaTree);
     }
-    return res.status(200);
+    return res.status(200).json(tree);
   } catch(error){
     console.error("Error depositing:", error);
     return res.status(500).json({ error: "An error occurred while depositing" });
