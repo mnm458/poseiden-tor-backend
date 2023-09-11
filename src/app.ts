@@ -41,7 +41,6 @@ function middleware(req: Request, res: Response, next: NextFunction) {
 app.use(middleware);
 
 app.get("/deposit/:commitment/:chain", async (req: Request, res: Response) => {
-  let result: number;
   try{
     const {commitment, chain} = req.params;
     if (chain == "mantle"){
@@ -57,7 +56,7 @@ app.get("/deposit/:commitment/:chain", async (req: Request, res: Response) => {
 });
 
 app.get("/withdraw/:leadIndex/:chain", async (req:Request, res: Response) => {
-
+  
 });
 
 // app.get("/deposit", async (req: Request, res: Response) => {
