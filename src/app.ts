@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 
-import { deposit } from "./merkleServices";
+import { deposit, withdraw } from "./merkleServices";
 
 import { MerkleTree } from "./utils/merkleTree"
 import { ethers } from "ethers";
@@ -55,11 +55,20 @@ app.get("/deposit/:commitment/:chain", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/withdraw/:leadIndex/:chain", async (req:Request, res: Response) => {
+app.get("/withdraw/:leafIndex/:chain", async (req:Request, res: Response) => {
   try{
-
+    let obj: any;
+    const {leafIndex: leafIndexStr, chain} = req.params;
+    const leafIndex = Number(leafIndexStr);
+    if (chain == "mantle"){
+      obj =  await withdraw(leafIndex,mantleTree);
+    } else if (chain == "linea"){
+      obj =  await withdraw(leafIndex, lineaTree);
+    }
+    return res.status(200).json(obj);
   } catch(error){
-    console.error("Error depositing:", error);
+    console.error("Error withdrawing:", error);
+    return res.status(500).json({ error: "An error occurred while withdrawing" });
   }
 });
 
