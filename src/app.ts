@@ -56,7 +56,11 @@ app.get("/deposit/:commitment/:chain", async (req: Request, res: Response) => {
 });
 
 app.get("/withdraw/:leadIndex/:chain", async (req:Request, res: Response) => {
-  
+  try{
+
+  } catch(error){
+    console.error("Error depositing:", error);
+  }
 });
 
 // app.get("/deposit", async (req: Request, res: Response) => {

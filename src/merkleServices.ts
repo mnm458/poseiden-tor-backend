@@ -1,11 +1,7 @@
 import { MerkleTree } from "./utils/merkleTree"
-//@ts-ignore
-import {buildPoseidon } from "circomlibjs";
 
 
 export async function deposit (commitment: string, tree: MerkleTree){
-    const HEIGHT = 20;
-    const poseidon = await buildPoseidon();
     try{
          await tree.insert(commitment);
          return tree;
@@ -13,6 +9,10 @@ export async function deposit (commitment: string, tree: MerkleTree){
         console.log(error);
         return error;
     }
-   
 }
 
+export async function withdraw(leafIndex: number, tree: MerkleTree){
+    const { root, path_elements, path_index } = await tree.path(
+        leafIndex
+   );
+}
