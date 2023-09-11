@@ -7,7 +7,6 @@ export async function deposit (commitment: string, tree: MerkleTree){
     const HEIGHT = 20;
     const poseidon = await buildPoseidon();
     try{
-    
          await tree.insert(commitment);
          return tree;
     } catch (error) {

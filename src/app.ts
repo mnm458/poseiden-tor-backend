@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 
-import { deposit } from "./deposit";
+import { deposit } from "./merkleServices";
 
 import { MerkleTree } from "./utils/merkleTree"
 import { ethers } from "ethers";
@@ -54,6 +54,10 @@ app.get("/deposit/:commitment/:chain", async (req: Request, res: Response) => {
     console.error("Error depositing:", error);
     return res.status(500).json({ error: "An error occurred while depositing" });
   }
+});
+
+app.get("/withdraw/:leadIndex/:chain", async (req:Request, res: Response) => {
+
 });
 
 // app.get("/deposit", async (req: Request, res: Response) => {
